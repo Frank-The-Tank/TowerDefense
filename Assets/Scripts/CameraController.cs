@@ -14,6 +14,14 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+
+        // Prevents screen from moving on Game Over state
+        if (GameManager.GameIsOver)
+        {
+            this.enabled = false;
+            return;
+        }
+
         // For testing purposes
         if (Input.GetKeyDown(KeyCode.Escape))
             doMovement = !doMovement;
