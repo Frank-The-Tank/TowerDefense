@@ -64,7 +64,6 @@ public class Node : MonoBehaviour {
         turret = _turret;
 
         turretBlueprint = blueprint;
-        turretBlueprint.upgradeCost = blueprint.cost + 25;
 
         GameObject effect = (GameObject)Instantiate(buildManager.buildEffect, GetBuildPosition(), Quaternion.identity);
         Destroy(effect, 5f);
@@ -95,6 +94,17 @@ public class Node : MonoBehaviour {
         isUpgraded = true;
 
         Debug.Log("Turret upgraded!");
+    }
+
+    public void SellTurret ()
+    {
+        PlayerStats.Money += turretBlueprint.GetSellAmount();
+
+        GameObject effect = (GameObject)Instantiate(buildManager.sellEffect, GetBuildPosition(), Quaternion.identity);
+        Destroy(effect, 5f);
+
+        Destroy(turret);
+        turretBlueprint = null;
     }
 
     void OnMouseEnter()
