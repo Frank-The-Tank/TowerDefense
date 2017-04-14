@@ -12,7 +12,7 @@ public class BuildManager : MonoBehaviour {
             return;
         }
         instance = this;
-    }
+    }`
 
     public GameObject buildEffect;
     public GameObject sellEffect;
