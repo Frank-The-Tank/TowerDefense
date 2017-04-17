@@ -10,6 +10,7 @@ public class Turret : MonoBehaviour {
     [Header("General")]
 
     public float range = 15f;
+    public AudioSource standardFire;
 
     [Header("Use Bullets (default)")]
 
@@ -139,6 +140,9 @@ public class Turret : MonoBehaviour {
     {
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
+
+        // Play fire audio
+        standardFire.Play();
 
         if (bullet != null)
         {
