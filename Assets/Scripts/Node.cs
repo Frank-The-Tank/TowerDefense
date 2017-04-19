@@ -71,21 +71,21 @@ public class Node : MonoBehaviour {
         Debug.Log("Turret built!");
     }
 
-    public void UpgradeTurret ()
+    public void UpgradeTurret (int upgradeIndex)
     {
-        if (PlayerStats.Money < turretBlueprint.upgradeCost)
+        if (PlayerStats.Money < turretBlueprint.upgradeCosts[upgradeIndex])
         {
             Debug.Log("Not enough money to upgrade turret");
             return;
         }
 
-        PlayerStats.Money -= turretBlueprint.upgradeCost;
+        PlayerStats.Money -= turretBlueprint.upgradeCosts[upgradeIndex];
 
         // Getting ride of the old turret 
         Destroy(turret);
 
         // Create new upgraded turret at node location
-        GameObject _turret = (GameObject)Instantiate(turretBlueprint.upgradedPrefab, GetBuildPosition(), Quaternion.identity);
+        GameObject _turret = (GameObject)Instantiate(turretBlueprint.upgradedPrefabs[upgradeIndex], GetBuildPosition(), Quaternion.identity);
         turret = _turret;
 
         GameObject effect = (GameObject)Instantiate(buildManager.buildEffect, GetBuildPosition(), Quaternion.identity);

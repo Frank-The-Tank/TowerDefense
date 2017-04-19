@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class NodeUI : MonoBehaviour {
 
     public GameObject ui;
+    public GameObject upgradeSelector;
 
     public Text upgradeCost;
     public Button upgradeButton;
@@ -21,7 +22,8 @@ public class NodeUI : MonoBehaviour {
 
         if (!target.isUpgraded)
         {
-            upgradeCost.text = "$" + target.turretBlueprint.upgradeCost;
+            // 0 is a placeholder for now
+            upgradeCost.text = "$" + target.turretBlueprint.upgradeCosts[0];
             upgradeButton.interactable = true;
         } else
         {
@@ -37,11 +39,17 @@ public class NodeUI : MonoBehaviour {
     public void Hide ()
     {
         ui.SetActive(false);
+        upgradeSelector.SetActive(false);
     }
 
     public void Upgrade ()
     {
-        target.UpgradeTurret();
+        upgradeSelector.SetActive(true);
+    }
+
+    public void upgradeSelected (int upgradeIndex)
+    {
+        target.UpgradeTurret(upgradeIndex);
         BuildManager.instance.DeselectNode();
     }
 
