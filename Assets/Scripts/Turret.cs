@@ -10,7 +10,7 @@ public class Turret : MonoBehaviour {
     [Header("General")]
 
     public float range = 15f;
-    public AudioSource standardFire;
+    public AudioSource fireSound;
 
     [Header("Use Bullets (default)")]
 
@@ -127,6 +127,8 @@ public class Turret : MonoBehaviour {
             impactLight.enabled = true;
         }
 
+        fireSound.Play();
+
         lineRenderer.SetPosition(0, firePoint.position);
         lineRenderer.SetPosition(1, target.position);
 
@@ -142,7 +144,7 @@ public class Turret : MonoBehaviour {
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
         // Play fire audio
-        standardFire.Play();
+        fireSound.Play();
 
         if (bullet != null)
         {
