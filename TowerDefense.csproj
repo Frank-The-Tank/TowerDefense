@@ -75,9 +75,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AudioManager.cs" />
     <Compile Include="Assets\Imports\TurretImports\Sci Fi Assets\Simple SciFi Gun Turret Set\Scripts\CameraMouseDrag.cs" />
     <Compile Include="Assets\Imports\TurretImports\Standard Assets\Effects\ImageEffects\Scripts\BloomOptimized.cs" />
+    <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\BuildManager.cs" />
     <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
