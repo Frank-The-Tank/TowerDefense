@@ -7,8 +7,8 @@ public class TurretBlueprint {
     public GameObject prefab;
     public int cost;
 
-    public GameObject[] upgradedPrefabs;
-    public int[] upgradeCosts;
+    public GameObject[] upgradedPrefabsTier1;
+    public int[] upgradeCostsTier1;
 
     public int GetSellAmount ()
     {

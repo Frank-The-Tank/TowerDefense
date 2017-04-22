@@ -78,6 +78,7 @@ public class Turret : MonoBehaviour {
             {
                 if (lineRenderer.enabled)
                 {
+                    fireSound.Stop();
                     lineRenderer.enabled = false;
                     impactEffect.Stop();
                     impactLight.enabled = false;
@@ -122,11 +123,11 @@ public class Turret : MonoBehaviour {
 
         if (!lineRenderer.enabled)
         {
+            fireSound.Play();
             lineRenderer.enabled = true;
             impactEffect.Play();
             impactLight.enabled = true;
-            fireSound.Play();
-        }
+        } 
 
         lineRenderer.SetPosition(0, firePoint.position);
         lineRenderer.SetPosition(1, target.position);
