@@ -6,6 +6,9 @@ public class Turret : MonoBehaviour {
 
     private Transform target;
     private Enemy targetEnemy;
+    // Each hit and kill adds to mutationCounter, when threshold for mutation level hit turret mutates
+    public float mutationCounter = 0f;
+    public int mutationLevel = 0;
 
     [Header("General")]
 
@@ -71,6 +74,13 @@ public class Turret : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (mutationCounter >= 100)
+        {
+            mutationCounter = 0;
+            mutationLevel += 1;
+            Mutate();
+        }
+
 		if (target == null)
         {
 
@@ -106,6 +116,13 @@ public class Turret : MonoBehaviour {
         }
 
 	}
+
+    void Mutate()
+    {
+        Bullet bullet = bulletPrefab.GetComponent<Bullet>();
+        fireRate += 1;
+        bullet.damage += 10;
+    }
 
     void LockOnTarget ()
     {
@@ -149,6 +166,7 @@ public class Turret : MonoBehaviour {
         if (bullet != null)
         {
             bullet.Seek(target);
+            mutationCounter += Random.Range(4.25f, 7.75f);
         }
     }
 
