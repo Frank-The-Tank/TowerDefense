@@ -13,6 +13,9 @@ public class Enemy : MonoBehaviour {
 
     public int worth = 50;
 
+    public Text damageAmount;
+    public Animation damageIndicator;
+
     public GameObject deathEffect;
 
     [Header("Unity Stuff")]
@@ -32,9 +35,12 @@ public class Enemy : MonoBehaviour {
 
         healthBar.fillAmount = health / startHealth;
 
+        damageAmount.text = amount.ToString();
+        damageIndicator.Play();
+
         if (health <= 0 && !isDead)
         {
-            Die();
+            Die(amount);
         }
     }
 
@@ -43,9 +49,12 @@ public class Enemy : MonoBehaviour {
         speed = startSpeed * (1f - pct);
     }
 
-    void Die ()
+    void Die (float amount)
     {
         isDead = true;
+
+        damageAmount.text = amount.ToString();
+        damageIndicator.Play();
 
         PlayerStats.Money += worth;
 
@@ -53,7 +62,10 @@ public class Enemy : MonoBehaviour {
         Destroy(effect, 5f);
 
         WaveSpawner.EnemiesAlive--;
-        
+
+        //Destroy(transform.Find("Canvas").Find("HealthBG").gameObject);
+        //Destroy(transform.Find("Canvas").gameObject);
+        //Destroy(transform.Find("Canvas").gameObject);
         Destroy(gameObject);
     }
 
