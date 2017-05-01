@@ -12,6 +12,14 @@ public class NodeUI : MonoBehaviour {
 
     public Text sellAmount;
 
+    [Header("Description Hover Fields")]
+    public GameObject redDescription;
+    public GameObject greenDescription;
+    public GameObject yellowDescription;
+    public GameObject orangeDescription;
+    public GameObject blueDescription;
+    public GameObject purpleDescription;
+
     private Node target; 
 
     public void SetTarget (Node _target)
@@ -58,5 +66,50 @@ public class NodeUI : MonoBehaviour {
         target.SellTurret();
         BuildManager.instance.DeselectNode();
     }
+
+
+    // START: Description Hover Fields
+    
+    public void showRedDescription()
+    {
+        redDescription.SetActive(true);
+    }
+
+    public void showGreenDescription()
+    {
+        greenDescription.SetActive(true);
+    }
+
+    public void showYellowDescription()
+    {
+        yellowDescription.SetActive(true);
+    }
+
+    public void showOrangeDescription()
+    {
+        orangeDescription.SetActive(true);
+    }
+
+    public void showBlueDescription()
+    {
+        blueDescription.SetActive(true);
+    }
+
+    public void showPurpleDescription()
+    {
+        purpleDescription.SetActive(true);
+    }
+
+    public void hideDescriptions()
+    {
+        redDescription.SetActive(false);
+        greenDescription.SetActive(false);
+        yellowDescription.SetActive(false);
+        orangeDescription.SetActive(false);
+        blueDescription.SetActive(false);
+        purpleDescription.SetActive(false);
+    }
+
+    // END
 
 }

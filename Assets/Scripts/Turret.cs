@@ -1,22 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Turret : MonoBehaviour {
 
     private Transform target;
     private Enemy targetEnemy;
-    // Each hit and kill adds to mutationCounter, when threshold for mutation level hit turret mutates
-    public float mutationCounter = 0f;
-    public int mutationLevel = 0;
 
     [Header("General")]
-
     public float range = 15f;
     public AudioSource fireSound;
 
-    [Header("Use Bullets (default)")]
+    // Each hit and kill adds to mutationCounter, when threshold for mutation level hit turret mutates
+    [Header("Mutation")]
+    public float mutationCounter = 0f;
+    public int mutationLevel = 0;
+    public Text mutationText;
+    public Animation mutationAnimation;
+    private double mutationThreshold = 100;
 
+    [Header("Use Bullets (default)")]
     public GameObject bulletPrefab;
     public float fireRate = 1f;
     private float fireCountdown = 0f;
@@ -74,9 +78,10 @@ public class Turret : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (mutationCounter >= 100)
+        if (mutationCounter >= mutationThreshold)
         {
             mutationCounter = 0;
+            mutationThreshold += mutationThreshold * 1.25;
             mutationLevel += 1;
             Mutate();
         }
@@ -120,8 +125,45 @@ public class Turret : MonoBehaviour {
     void Mutate()
     {
         Bullet bullet = bulletPrefab.GetComponent<Bullet>();
-        fireRate += 1;
-        bullet.damage += 10;
+        switch (gameObject.name)
+        {
+            case "StandardTurret_UpgradedBlue(Clone)":
+                // TODO
+                fireRate += 0.2f;
+                bullet.damage += 2;
+                break;
+            case "StandardTurret_UpgradedGreen(Clone)":
+                // TODO
+                fireRate += 0.2f;
+                bullet.damage += 2;
+                break;
+            case "StandardTurret_UpgradedOrange(Clone)":
+                // TODO
+                fireRate += 0.2f;
+                bullet.damage += 2;
+                break;
+            case "StandardTurret_UpgradedPurple(Clone)":
+                // TODO
+                fireRate += 0.2f;
+                bullet.damage += 2;
+                break;
+            case "StandardTurret_UpgradedRed(Clone)":
+                // TODO
+                fireRate += 0.2f;
+                bullet.damage += 2;
+                break;
+            case "StandardTurret_UpgradedYellow(Clone)":
+                // TODO
+                fireRate += 0.2f;
+                bullet.damage += 2;
+                break;
+            default:
+                fireRate += 0.1f;
+                bullet.damage += 1;
+                break;
+        }
+        mutationText.text = "Mutation";
+        mutationAnimation.Play();
     }
 
     void LockOnTarget ()
@@ -166,7 +208,30 @@ public class Turret : MonoBehaviour {
         if (bullet != null)
         {
             bullet.Seek(target);
-            mutationCounter += Random.Range(4.25f, 7.75f);
+            switch (bullet.name)
+            {
+                case "BulletBlue(Clone)":
+                    mutationCounter += Random.Range(9.75f, 10.25f);
+                    break;
+                case "BulletGreen(Clone)":
+                    mutationCounter += Random.Range(9.75f, 10.25f);
+                    break;
+                case "BulletOrange(Clone)":
+                    mutationCounter += Random.Range(9.75f, 10.25f);
+                    break;
+                case "BulletPurple(Clone)":
+                    mutationCounter += Random.Range(9.75f, 10.25f);
+                    break;
+                case "BulletRed(Clone)":
+                    mutationCounter += Random.Range(9.75f, 10.25f);
+                    break;
+                case "BulletYellow(Clone)":
+                    mutationCounter += Random.Range(13.75f, 14.25f);
+                    break;
+                default:
+                    mutationCounter += Random.Range(4.25f, 7.75f);
+                    break;
+            }
         }
     }
 
